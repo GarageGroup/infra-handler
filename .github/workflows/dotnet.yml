@@ -42,6 +42,28 @@ jobs:
     - name: Pack Handler.Core
       run: dotnet pack ./src/*/Handler.Core.csproj --no-restore -o ~/nuget  -c Release
 
+    # Handler.Union
+
+    - name: Restore Handler.Union
+      run: dotnet restore ./src/*/Handler.Union.csproj
+
+    - name: Build Handler.Union
+      run: dotnet build ./src/*/Handler.Union.csproj --no-restore  -c Release
+
+    - name: Pack Handler.Union
+      run: dotnet pack ./src/*/Handler.Union.csproj --no-restore -o ~/nuget  -c Release
+
+    # Handler.Console
+
+    - name: Restore Handler.Console
+      run: dotnet restore ./src/*/Handler.Console.csproj
+
+    - name: Build Handler.Console
+      run: dotnet build ./src/*/Handler.Console.csproj --no-restore  -c Release
+
+    - name: Pack Handler.Console
+      run: dotnet pack ./src/*/Handler.Console.csproj --no-restore -o ~/nuget  -c Release
+
     # Push
 
     - name: Push Packages
