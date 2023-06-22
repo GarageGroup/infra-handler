@@ -6,9 +6,9 @@
     <Nullable>enable</Nullable>
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <RootNamespace>GGroupp.Infra</RootNamespace>
-    <AssemblyName>GGroupp.Infra.Handler.Core</AssemblyName>
-    <Version>0.0.1</Version>
+    <RootNamespace>GarageGroup.Infra</RootNamespace>
+    <AssemblyName>GarageGroup.Infra.Handler.Core</AssemblyName>
+    <Version>0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

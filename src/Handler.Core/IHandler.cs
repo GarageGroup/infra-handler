@@ -2,9 +2,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
-public interface IHandler<THandlerData>
+public interface IHandler<THandlerIn, THandlerOut>
 {
-    ValueTask<Result<Unit, HandlerFailure>> HandleAsync(THandlerData? handlerData, CancellationToken cancellationToken);
+    ValueTask<Result<THandlerOut, Failure<HandlerFailureCode>>> HandleAsync(THandlerIn? input, CancellationToken cancellationToken);
 }

@@ -7,12 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PrimeFuncPack;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 public static class ConsoleDependencyExtensions
 {
     public static async Task<Unit> RunConsoleAsync<THandler>(this Dependency<THandler> dependency, [AllowNull] string[] args = null)
-        where THandler : IHandler<Unit>
+        where THandler : IHandler<Unit, Unit>
     {
         ArgumentNullException.ThrowIfNull(dependency);
         var configuration = BuildConfiguration(args ?? Array.Empty<string>());
@@ -26,9 +26,9 @@ public static class ConsoleDependencyExtensions
         return result.Fold(Unit.From, logger.LogFailure);
     }
 
-    private static Unit LogFailure(this ILogger logger, HandlerFailure failure)
+    private static Unit LogFailure(this ILogger logger, Failure<HandlerFailureCode> failure)
     {
-        if (failure.FailureAction is not HandlerFailureAction.Remove)
+        if (failure.FailureCode is not HandlerFailureCode.Persistent)
         {
             throw new InvalidOperationException($"An unexpected error has occured: {failure.FailureMessage}");
         }
@@ -60,8 +60,4 @@ public static class ConsoleDependencyExtensions
         .AddEnvironmentVariables()
         .AddCommandLine(args)
         .Build();
-
-    private static InvalidOperationException CreateHandlerException(HandlerFailure handlerFailure)
-        =>
-        new($"An unexpected failure has occured: {handlerFailure.FailureMessage}");
 }

@@ -2,15 +2,15 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 partial class UnionHandler<T>
 {
-    public ValueTask<Result<Unit, HandlerFailure>> HandleAsync(T? handlerData, CancellationToken cancellationToken)
+    public ValueTask<Result<Unit, Failure<HandlerFailureCode>>> HandleAsync(T? input, CancellationToken cancellationToken)
     {
         if (cancellationToken.IsCancellationRequested)
         {
-            return ValueTask.FromCanceled<Result<Unit, HandlerFailure>>(cancellationToken);
+            return ValueTask.FromCanceled<Result<Unit, Failure<HandlerFailureCode>>>(cancellationToken);
         }
 
         if (innerHandlers.Length is 0)
@@ -18,14 +18,14 @@ partial class UnionHandler<T>
             return new(Result.Success<Unit>(default));
         }
 
-        return InnerHandleAsync(handlerData, cancellationToken);
+        return InnerHandleAsync(input, cancellationToken);
     }
 
-    private async ValueTask<Result<Unit, HandlerFailure>> InnerHandleAsync(T? handlerData, CancellationToken cancellationToken)
+    private async ValueTask<Result<Unit, Failure<HandlerFailureCode>>> InnerHandleAsync(T? input, CancellationToken cancellationToken)
     {
         foreach (var innerHandler in innerHandlers)
         {
-            var result = await innerHandler.HandleAsync(handlerData, cancellationToken).ConfigureAwait(false);
+            var result = await innerHandler.HandleAsync(input, cancellationToken).ConfigureAwait(false);
             if (result.IsFailure)
             {
                 return result.FailureOrThrow();

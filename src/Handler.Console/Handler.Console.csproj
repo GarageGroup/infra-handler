@@ -6,13 +6,13 @@
     <Nullable>enable</Nullable>
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <RootNamespace>GGroupp.Infra</RootNamespace>
-    <AssemblyName>GGroupp.Infra.Handler.Console</AssemblyName>
-    <Version>0.0.1</Version>
+    <RootNamespace>GarageGroup.Infra</RootNamespace>
+    <AssemblyName>GarageGroup.Infra.Handler.Console</AssemblyName>
+    <Version>0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GGroupp.Infra.Handler.Core" Version="0.0.1" />
+    <PackageReference Include="GarageGroup.Infra.Handler.Core" Version="0.1.0" />
     <PackageReference Include="GGroupp.Infra.Http.SocketsHandlerProvider" Version="2.4.0" />
   </ItemGroup>
 
