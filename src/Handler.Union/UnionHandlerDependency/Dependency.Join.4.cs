@@ -1,16 +1,16 @@
 using System;
 using PrimeFuncPack;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 partial class UnionHandlerDependency
 {
     public static Dependency<UnionHandler<T>> Join<THandler1, THandler2, THandler3, THandler4, T>(
         this Dependency<THandler1, THandler2, THandler3, THandler4> dependency)
-        where THandler1 : IHandler<T>
-        where THandler2 : IHandler<T>
-        where THandler3 : IHandler<T>
-        where THandler4 : IHandler<T>
+        where THandler1 : IHandler<T, Unit>
+        where THandler2 : IHandler<T, Unit>
+        where THandler3 : IHandler<T, Unit>
+        where THandler4 : IHandler<T, Unit>
     {
         ArgumentNullException.ThrowIfNull(dependency);
         return dependency.Fold(CreateUnionHandler);

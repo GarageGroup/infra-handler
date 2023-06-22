@@ -1,20 +1,20 @@
 using System;
 using PrimeFuncPack;
 
-namespace GGroupp.Infra;
+namespace GarageGroup.Infra;
 
 partial class UnionHandlerDependency
 {
     public static Dependency<UnionHandler<T>> Join<THandler1, THandler2, THandler3, THandler4, THandler5, THandler6, THandler7, THandlerRest, T>(
         this Dependency<THandler1, THandler2, THandler3, THandler4, THandler5, THandler6, THandler7, THandlerRest> dependency)
-        where THandler1 : IHandler<T>
-        where THandler2 : IHandler<T>
-        where THandler3 : IHandler<T>
-        where THandler4 : IHandler<T>
-        where THandler5 : IHandler<T>
-        where THandler6 : IHandler<T>
-        where THandler7 : IHandler<T>
-        where THandlerRest : IHandler<T>
+        where THandler1 : IHandler<T, Unit>
+        where THandler2 : IHandler<T, Unit>
+        where THandler3 : IHandler<T, Unit>
+        where THandler4 : IHandler<T, Unit>
+        where THandler5 : IHandler<T, Unit>
+        where THandler6 : IHandler<T, Unit>
+        where THandler7 : IHandler<T, Unit>
+        where THandlerRest : IHandler<T, Unit>
     {
         ArgumentNullException.ThrowIfNull(dependency);
         return dependency.Fold(CreateUnionHandler);
