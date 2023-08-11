@@ -33,7 +33,7 @@ public static class ConsoleDependencyExtensions
             throw new InvalidOperationException($"An unexpected error has occured: {failure.FailureMessage}");
         }
 
-        logger.LogWarning("An unexpected failure has occured: {failureMessage}", failure.FailureMessage);
+        logger.LogError(failure.SourceException, "An unexpected failure has occured: {failureMessage}", failure.FailureMessage);
         return default;
     }
 
