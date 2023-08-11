@@ -8,11 +8,11 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>GarageGroup.Infra</RootNamespace>
     <AssemblyName>GarageGroup.Infra.Handler.Core</AssemblyName>
-    <Version>0.1.0</Version>
+    <Version>0.2.0-rc.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="PrimeFuncPack.Core.Failure" Version="2.0.1" />
+    <PackageReference Include="PrimeFuncPack.Core.Failure" Version="2.1.0-rc.1" />
     <PackageReference Include="PrimeFuncPack.Core.Result" Version="2.0.2" />
   </ItemGroup>
 
