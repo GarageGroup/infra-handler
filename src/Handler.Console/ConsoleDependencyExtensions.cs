@@ -30,7 +30,7 @@ public static class ConsoleDependencyExtensions
     {
         if (failure.FailureCode is not HandlerFailureCode.Persistent)
         {
-            throw new InvalidOperationException($"An unexpected error has occured: {failure.FailureMessage}");
+            throw new InvalidOperationException($"An unexpected error has occured: {failure.FailureMessage}", failure.SourceException);
         }
 
         logger.LogError(failure.SourceException, "An unexpected failure has occured: {failureMessage}", failure.FailureMessage);

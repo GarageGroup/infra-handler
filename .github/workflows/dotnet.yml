@@ -31,6 +31,17 @@ jobs:
         -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
         --store-password-in-clear-text
 
+    # Handler.FailureCode
+
+    - name: Restore Handler.FailureCode
+      run: dotnet restore ./src/*/Handler.FailureCode.csproj
+
+    - name: Build Handler.FailureCode
+      run: dotnet build ./src/*/Handler.FailureCode.csproj --no-restore  -c Release
+
+    - name: Pack Handler.FailureCode
+      run: dotnet pack ./src/*/Handler.FailureCode.csproj --no-restore -o ~/nuget  -c Release
+
     # Handler.Core
 
     - name: Restore Handler.Core
