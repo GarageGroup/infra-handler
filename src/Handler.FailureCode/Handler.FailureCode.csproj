@@ -7,14 +7,8 @@
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>GarageGroup.Infra</RootNamespace>
-    <AssemblyName>GarageGroup.Infra.Handler.Core</AssemblyName>
-    <Version>0.3.0</Version>
+    <AssemblyName>GarageGroup.Infra.Handler.FailureCode</AssemblyName>
+    <Version>0.0.1</Version>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="GarageGroup.Infra.Handler.FailureCode" Version="0.0.1" />
-    <PackageReference Include="PrimeFuncPack.Core.Failure" Version="2.1.0" />
-    <PackageReference Include="PrimeFuncPack.Core.Result" Version="2.0.2" />
-  </ItemGroup>
 
 </Project>
