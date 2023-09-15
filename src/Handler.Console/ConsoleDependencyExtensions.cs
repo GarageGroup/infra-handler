@@ -11,8 +11,11 @@ namespace GarageGroup.Infra;
 
 public static class ConsoleDependencyExtensions
 {
-    public static async Task<Unit> RunConsoleAsync<THandler>(this Dependency<THandler> dependency, [AllowNull] string[] args = null)
-        where THandler : IHandler<Unit, Unit>
+    public static async Task<Unit> RunConsoleAsync<THandler, TIn>(
+        this Dependency<THandler> dependency,
+        [AllowNull] string inputSection = null,
+        [AllowNull] string[] args = null)
+        where THandler : IHandler<TIn, Unit>
     {
         ArgumentNullException.ThrowIfNull(dependency);
         var configuration = BuildConfiguration(args ?? Array.Empty<string>());
@@ -21,9 +24,21 @@ public static class ConsoleDependencyExtensions
         using var cancellationTokenSource = configuration.GetCancellationTokenSource();
 
         var logger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("HandlerConsoleRunner");
-        var result = await dependency.Resolve(serviceProvider).HandleAsync(default, cancellationTokenSource.Token);
+
+        var input = configuration.ReadInput<TIn>(inputSection ?? string.Empty);
+        var result = await dependency.Resolve(serviceProvider).HandleAsync(input, cancellationTokenSource.Token);
 
         return result.Fold(Unit.From, logger.LogFailure);
+    }
+
+    private static TIn? ReadInput<TIn>(this IConfiguration configuration, string sectionName)
+    {
+        if (typeof(TIn) == typeof(Unit))
+        {
+            return default;
+        }
+
+        return configuration.GetRequiredSection(sectionName).Get<TIn>();
     }
 
     private static Unit LogFailure(this ILogger logger, Failure<HandlerFailureCode> failure)
