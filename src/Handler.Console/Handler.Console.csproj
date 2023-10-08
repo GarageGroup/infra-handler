@@ -1,19 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>GarageGroup.Infra</RootNamespace>
     <AssemblyName>GarageGroup.Infra.Handler.Console</AssemblyName>
-    <Version>0.5.0</Version>
+    <Version>0.5.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GarageGroup.Infra.Handler.Core" Version="0.3.0" />
-    <PackageReference Include="GarageGroup.Infra.Http.SocketsHandlerProvider" Version="2.4.1" />
+    <PackageReference Include="GarageGroup.Infra.Handler.Core" Version="0.3.1" />
+    <PackageReference Include="GarageGroup.Infra.Http.SocketsHandlerProvider" Version="2.4.2" />
   </ItemGroup>
 
 </Project>
