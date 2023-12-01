@@ -11,13 +11,25 @@ namespace GarageGroup.Infra;
 
 public static class ConsoleDependencyExtensions
 {
-    public static async Task<Unit> RunConsoleAsync<THandler, TIn>(
-        this Dependency<THandler> dependency,
-        [AllowNull] string inputSection = null,
-        [AllowNull] string[] args = null)
+    public static Task<Unit> RunConsoleAsync<THandler, TIn>(
+        this Dependency<THandler> dependency, [AllowNull] string inputSection = null, [AllowNull] string[] args = null)
         where THandler : IHandler<TIn, Unit>
     {
         ArgumentNullException.ThrowIfNull(dependency);
+        return dependency.InnerRunConsoleAsync<THandler, TIn>(inputSection, args);
+    }
+
+    public static Task<Unit> RunConsoleAsync<TIn>(
+        this Dependency<IHandler<TIn, Unit>> dependency, [AllowNull] string inputSection = null, [AllowNull] string[] args = null)
+    {
+        ArgumentNullException.ThrowIfNull(dependency);
+        return dependency.InnerRunConsoleAsync<IHandler<TIn, Unit>, TIn>(inputSection, args);
+    }
+
+    private static async Task<Unit> InnerRunConsoleAsync<THandler, TIn>(
+        this Dependency<THandler> dependency, [AllowNull] string inputSection, [AllowNull] string[] args)
+        where THandler : IHandler<TIn, Unit>
+    {
         var configuration = BuildConfiguration(args ?? Array.Empty<string>());
 
         using var serviceProvider = configuration.CreateServiceProvider();
@@ -66,6 +78,7 @@ public static class ConsoleDependencyExtensions
         .AddSingleton(
             configuration)
         .AddSocketsHttpHandlerProviderAsSingleton()
+        .AddTokenCredentialStandardAsSingleton()
         .BuildServiceProvider();
 
     private static IConfiguration BuildConfiguration(string[] args)

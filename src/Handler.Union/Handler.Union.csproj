@@ -1,19 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>GarageGroup.Infra</RootNamespace>
     <AssemblyName>GarageGroup.Infra.Handler.Union</AssemblyName>
-    <Version>0.3.1</Version>
+    <Version>0.4.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GarageGroup.Infra.Handler.Core" Version="0.3.1" />
-    <PackageReference Include="PrimeFuncPack.Dependency.Core" Version="2.0.2" />
+    <PackageReference Include="GarageGroup.Infra.Handler.Core" Version="0.4.0" />
+    <PackageReference Include="PrimeFuncPack.Dependency.Core" Version="2.1.0" />
   </ItemGroup>
 
 </Project>
