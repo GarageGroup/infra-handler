@@ -8,13 +8,13 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>GarageGroup.Infra</RootNamespace>
     <AssemblyName>GarageGroup.Infra.Handler.Console</AssemblyName>
-    <Version>0.7.0</Version>
+    <Version>0.8.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="GarageGroup.Infra.Azure.TokenCredential" Version="0.1.0" />
-    <PackageReference Include="GarageGroup.Infra.Handler.Core" Version="0.4.0" />
-    <PackageReference Include="GarageGroup.Infra.Http.SocketsHandlerProvider" Version="2.4.2" />
+    <PackageReference Include="GarageGroup.Infra.Handler.Core" Version="0.5.0" />
+    <PackageReference Include="GarageGroup.Infra.Http.SocketsHandlerProvider" Version="2.5.1" />
   </ItemGroup>
 
 </Project>
