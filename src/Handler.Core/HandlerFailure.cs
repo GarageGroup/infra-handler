@@ -5,11 +5,13 @@ namespace GarageGroup.Infra;
 
 public static class HandlerFailure
 {
+    [Obsolete("This method is obsolete. Use failure.WithFailureCode(HandlerFailureCode.Persistent) instead")]
     public static HandlerFailureCode ToPersistentFailureCode<TSourceFailureCode>(TSourceFailureCode _)
         where TSourceFailureCode : struct
         =>
         HandlerFailureCode.Persistent;
 
+    [Obsolete("This method is obsolete. Use failure.WithFailureCode(HandlerFailureCode.Transient) instead")]
     public static HandlerFailureCode ToTransientFailureCode<TSourceFailureCode>(TSourceFailureCode _)
         where TSourceFailureCode : struct
         =>
@@ -32,8 +34,4 @@ public static class HandlerFailure
             SourceException = new AggregateException(sourceException, failureException)
         };
     }
-
-    public static HandlerFailureException ToException(this Failure<HandlerFailureCode> handlerFailure)
-        =>
-        new(handlerFailure);
 }
