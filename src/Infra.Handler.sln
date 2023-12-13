@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Handler.Union", "Handler.Un
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Handler.Console", "Handler.Console\Handler.Console.csproj", "{952AEC96-BEE7-4A48-91A7-CD3BFBE5E0CB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Handler.AspNetCore", "Handler.AspNetCore\Handler.AspNetCore.csproj", "{47F6F3DE-18DD-49F3-8FEF-C88E828AAFAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Handler.AspNetCore.Generator", "Handler.AspNetCore.Generator\Handler.AspNetCore.Generator.csproj", "{7830713B-3433-4FE3-B09F-0726D8224EF9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{952AEC96-BEE7-4A48-91A7-CD3BFBE5E0CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{952AEC96-BEE7-4A48-91A7-CD3BFBE5E0CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{952AEC96-BEE7-4A48-91A7-CD3BFBE5E0CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47F6F3DE-18DD-49F3-8FEF-C88E828AAFAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47F6F3DE-18DD-49F3-8FEF-C88E828AAFAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47F6F3DE-18DD-49F3-8FEF-C88E828AAFAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47F6F3DE-18DD-49F3-8FEF-C88E828AAFAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7830713B-3433-4FE3-B09F-0726D8224EF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7830713B-3433-4FE3-B09F-0726D8224EF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7830713B-3433-4FE3-B09F-0726D8224EF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7830713B-3433-4FE3-B09F-0726D8224EF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

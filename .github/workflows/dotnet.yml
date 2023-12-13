@@ -77,6 +77,28 @@ jobs:
     - name: Pack Handler.Console
       run: dotnet pack ./src/*/Handler.Console.csproj --no-restore -o ~/nuget  -c Release
 
+    # Handler.AspNetCore.Generator
+
+    - name: Restore Handler.AspNetCore.Generator
+      run: dotnet restore ./src/*/Handler.AspNetCore.Generator.csproj
+
+    - name: Build Handler.AspNetCore.Generator
+      run: dotnet build ./src/*/Handler.AspNetCore.Generator.csproj --no-restore  -c Release
+
+    - name: Pack Handler.AspNetCore.Generator
+      run: dotnet pack ./src/*/Handler.AspNetCore.Generator.csproj --no-restore -o ~/nuget  -c Release
+
+    # Handler.AspNetCore
+
+    - name: Restore Handler.AspNetCore
+      run: dotnet restore ./src/*/Handler.AspNetCore.csproj
+
+    - name: Build Handler.AspNetCore
+      run: dotnet build ./src/*/Handler.AspNetCore.csproj --no-restore  -c Release
+
+    - name: Pack Handler.AspNetCore
+      run: dotnet pack ./src/*/Handler.AspNetCore.csproj --no-restore -o ~/nuget  -c Release
+
     # Push
 
     - name: Push Packages
