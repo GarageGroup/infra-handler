@@ -82,8 +82,14 @@ partial class HandlerApplicationBuilder
         }
 
         context.Response.StatusCode = SuccessStatusCode;
-        await context.Response.WriteAsJsonAsync(success, SerializerOptions, context.RequestAborted).ConfigureAwait(false);
 
+        if (success is string text)
+        {
+            await context.Response.WriteAsync(text, context.RequestAborted).ConfigureAwait(false);
+            return default;
+        }
+
+        await context.Response.WriteAsJsonAsync(success, SerializerOptions, context.RequestAborted).ConfigureAwait(false);
         return default;
     }
 
