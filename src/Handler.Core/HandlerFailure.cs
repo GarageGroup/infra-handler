@@ -5,18 +5,6 @@ namespace GarageGroup.Infra;
 
 public static class HandlerFailure
 {
-    [Obsolete("This method is obsolete. Use failure.WithFailureCode(HandlerFailureCode.Persistent) instead")]
-    public static HandlerFailureCode ToPersistentFailureCode<TSourceFailureCode>(TSourceFailureCode _)
-        where TSourceFailureCode : struct
-        =>
-        HandlerFailureCode.Persistent;
-
-    [Obsolete("This method is obsolete. Use failure.WithFailureCode(HandlerFailureCode.Transient) instead")]
-    public static HandlerFailureCode ToTransientFailureCode<TSourceFailureCode>(TSourceFailureCode _)
-        where TSourceFailureCode : struct
-        =>
-        HandlerFailureCode.Transient;
-
     public static Failure<HandlerFailureCode> Join(
         this Failure<HandlerFailureCode> source, Failure<HandlerFailureCode> failure, [AllowNull] string failureMessage)
     {

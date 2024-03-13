@@ -26,6 +26,7 @@ partial class UnionHandler<T>
         foreach (var innerHandler in innerHandlers)
         {
             var result = await innerHandler.HandleAsync(input, cancellationToken).ConfigureAwait(false);
+
             if (result.IsFailure)
             {
                 return result.FailureOrThrow();

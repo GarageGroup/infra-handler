@@ -3,17 +3,14 @@
 namespace GarageGroup.Infra;
 
 [AttributeUsage(AttributeTargets.Method)]
-public sealed class HandlerApplicationExtensionAttribute : Attribute
+public sealed class HandlerApplicationExtensionAttribute(
+    string method = HttpMethodName.Get,
+    string route = HandlerApplicationExtensionAttribute.DefaultRoute)
+    : Attribute
 {
     private const string DefaultRoute = "/";
 
-    public HandlerApplicationExtensionAttribute(string method = HttpMethodName.Get, string route = DefaultRoute)
-    {
-        Method = string.IsNullOrEmpty(method) ? HttpMethodName.Get : method;
-        Route = string.IsNullOrEmpty(route) ? DefaultRoute : route;
-    }
+    public string Method { get; } = string.IsNullOrEmpty(method) ? HttpMethodName.Get : method;
 
-    public string Method { get; }
-
-    public string Route { get; }
+    public string Route { get; } = string.IsNullOrEmpty(route) ? DefaultRoute : route;
 }
