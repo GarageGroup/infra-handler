@@ -3,11 +3,7 @@ using System;
 namespace GarageGroup.Infra;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-public sealed class HandlerDataJsonAttribute : Attribute
+public sealed class HandlerDataJsonAttribute(string rootPath) : Attribute
 {
-    public HandlerDataJsonAttribute(string rootPath)
-        =>
-        RootPath = rootPath ?? string.Empty;
-
-    public string RootPath { get; }
+    public string RootPath { get; } = string.IsNullOrEmpty(rootPath) ? string.Empty : rootPath;
 }

@@ -7,7 +7,7 @@ public sealed partial class UnionHandler<T> : IHandler<T, Unit>
     public static UnionHandler<T> From(params IHandler<T, Unit>[] innerHandlers)
         =>
         new(
-            innerHandlers ?? Array.Empty<IHandler<T, Unit>>());
+            innerHandlers ?? []);
 
     private readonly IHandler<T, Unit>[] innerHandlers;
 
