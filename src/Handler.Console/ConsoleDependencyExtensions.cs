@@ -13,17 +13,8 @@ public static class ConsoleDependencyExtensions
 {
     public static Task<Unit> RunConsoleAsync<THandler, TIn>(
         this Dependency<THandler> dependency,
-        [AllowNull] string inputSection = null,
-        [AllowNull] string[] args = null)
-        where THandler : IHandler<TIn, Unit>
-    {
-        ArgumentNullException.ThrowIfNull(dependency);
-        return dependency.InnerRunConsoleAsync<THandler, TIn>(null, inputSection, args);
-    }
-
-    public static Task<Unit> RunConsoleAsync<THandler, TIn>(
-        this Dependency<THandler> dependency,
-        Action<IServiceCollection> configureServices,
+        Action<ILoggingBuilder>? configureLogger = null,
+        Action<IServiceCollection>? configureServices = null,
         [AllowNull] string inputSection = null,
         [AllowNull] string[] args = null)
         where THandler : IHandler<TIn, Unit>
@@ -31,40 +22,31 @@ public static class ConsoleDependencyExtensions
         ArgumentNullException.ThrowIfNull(dependency);
         ArgumentNullException.ThrowIfNull(configureServices);
 
-        return dependency.InnerRunConsoleAsync<THandler, TIn>(configureServices, inputSection, args);
+        return dependency.InnerRunConsoleAsync<THandler, TIn>(configureLogger, configureServices, inputSection, args);
     }
 
     public static Task<Unit> RunConsoleAsync<TIn>(
         this Dependency<IHandler<TIn, Unit>> dependency,
+        Action<ILoggingBuilder>? configureLogger = null,
+        Action<IServiceCollection>? configureServices = null,
         [AllowNull] string inputSection = null,
         [AllowNull] string[] args = null)
     {
         ArgumentNullException.ThrowIfNull(dependency);
-        return dependency.InnerRunConsoleAsync<IHandler<TIn, Unit>, TIn>(null, inputSection, args);
-    }
-
-    public static Task<Unit> RunConsoleAsync<TIn>(
-        this Dependency<IHandler<TIn, Unit>> dependency,
-        Action<IServiceCollection> configureServices,
-        [AllowNull] string inputSection = null,
-        [AllowNull] string[] args = null)
-    {
-        ArgumentNullException.ThrowIfNull(dependency);
-        ArgumentNullException.ThrowIfNull(configureServices);
-
-        return dependency.InnerRunConsoleAsync<IHandler<TIn, Unit>, TIn>(configureServices, inputSection, args);
+        return dependency.InnerRunConsoleAsync<IHandler<TIn, Unit>, TIn>(configureLogger, configureServices, inputSection, args);
     }
 
     private static async Task<Unit> InnerRunConsoleAsync<THandler, TIn>(
         this Dependency<THandler> dependency,
+        Action<ILoggingBuilder>? configureLogger,
         Action<IServiceCollection>? configureServices,
         [AllowNull] string inputSection,
         [AllowNull] string[] args)
         where THandler : IHandler<TIn, Unit>
     {
-        var configuration = BuildConfiguration(args ?? Array.Empty<string>());
+        var configuration = BuildConfiguration(args ?? []);
 
-        using var serviceProvider = configuration.CreateServiceProvider(configureServices);
+        using var serviceProvider = configuration.CreateServiceProvider(configureLogger, configureServices);
         using var cancellationTokenSource = configuration.GetCancellationTokenSource();
 
         var logger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("HandlerConsoleRunner");
@@ -120,20 +102,23 @@ public static class ConsoleDependencyExtensions
     }
 
     private static ServiceProvider CreateServiceProvider(
-        this IConfiguration configuration,
-        Action<IServiceCollection>? configureServices)
+        this IConfiguration configuration, Action<ILoggingBuilder>? configureLogger, Action<IServiceCollection>? configureServices)
     {
         var services = new ServiceCollection()
-        .AddLogging(
-            static builder => builder.AddConsole())
-        .AddSingleton(
-            configuration)
-        .AddSocketsHttpHandlerProviderAsSingleton()
-        .AddTokenCredentialStandardAsSingleton();
+            .AddLogging(InnerConfigureLogger)
+            .AddSingleton(configuration)
+            .AddSocketsHttpHandlerProviderAsSingleton()
+            .AddTokenCredentialStandardAsSingleton();
 
         configureServices?.Invoke(services);
 
         return services.BuildServiceProvider();
+
+        void InnerConfigureLogger(ILoggingBuilder builder)
+        {
+            builder = builder.AddConsole();
+            configureLogger?.Invoke(builder);
+        }
     }
 
     private static IConfiguration BuildConfiguration(string[] args)
