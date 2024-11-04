@@ -1,19 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);IDE0130;CA1859</NoWarn>
     <RootNamespace>GarageGroup.Infra</RootNamespace>
     <AssemblyName>GarageGroup.Infra.Handler.Console</AssemblyName>
-    <Version>0.11.0</Version>
+    <Version>0.12.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GarageGroup.Infra.Azure.TokenCredential" Version="0.2.0" />
-    <PackageReference Include="GarageGroup.Infra.Handler.Core" Version="0.6.0" />
+    <PackageReference Include="GarageGroup.Infra.Azure.TokenCredential" Version="0.3.0" />
+    <PackageReference Include="GarageGroup.Infra.Handler.Core" Version="0.6.1" />
     <PackageReference Include="GarageGroup.Infra.Http.SocketsHandlerProvider" Version="3.0.0" />
   </ItemGroup>
 
