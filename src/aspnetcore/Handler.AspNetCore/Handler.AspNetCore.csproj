@@ -9,7 +9,7 @@
     <NoWarn>$(NoWarn);IDE0130;CA1859;CA1873</NoWarn>
     <RootNamespace>GarageGroup.Infra</RootNamespace>
     <AssemblyName>GarageGroup.Infra.Handler.AspNetCore</AssemblyName>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
