@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using PrimeFuncPack;
 
 namespace GarageGroup.Infra;
 
@@ -14,7 +14,7 @@ internal sealed record class RootTypeMetadata
         Namespace = @namespace ?? string.Empty;
         TypeName = typeName ?? string.Empty;
         ProviderType = providerType;
-        ResolverTypes = resolverTypes ?? Array.Empty<ResolverMetadata>();
+        ResolverTypes = resolverTypes ?? [];
     }
 
     public string Namespace { get; }
