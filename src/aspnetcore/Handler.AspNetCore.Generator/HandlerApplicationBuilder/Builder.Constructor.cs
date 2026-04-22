@@ -1,4 +1,6 @@
-﻿namespace GarageGroup.Infra;
+﻿using PrimeFuncPack;
+
+namespace GarageGroup.Infra;
 
 partial class HandlerApplicationBuilder
 {
@@ -6,7 +8,7 @@ partial class HandlerApplicationBuilder
         =>
         new SourceBuilder(
             rootType.Namespace)
-        .AppendCodeLine(
+        .AppendCodeLines(
             $"internal static partial class {rootType.TypeName}")
         .BeginCodeBlock()
         .EndCodeBlock()

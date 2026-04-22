@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using PrimeFuncPack;
 
 namespace GarageGroup.Infra;
 
@@ -10,13 +11,13 @@ partial class HandlerApplicationBuilder
             rootType.Namespace)
         .AddUsing(
             "Microsoft.AspNetCore.Builder")
-        .AppendCodeLine(
+        .AppendCodeLines(
             $"partial class {rootType.TypeName}")
         .BeginCodeBlock()
-        .AppendCodeLine(
+        .AppendCodeLines(
             $"internal static TBuilder {resolver.ResolverMethodName}<TBuilder>(this TBuilder builder) where TBuilder : IApplicationBuilder")
         .BeginLambda()
-        .AppendCodeLine(
+        .AppendCodeLines(
             rootType.BuildEndpointCodeLine(resolver))
         .EndLambda()
         .EndCodeBlock()

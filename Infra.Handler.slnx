@@ -1,0 +1,21 @@
+<Solution>
+  <Folder Name="/.github/workflows/">
+    <File Path=".github/workflows/dotnet.yml" />
+  </Folder>
+  <Folder Name="/aspnetcore/">
+    <Project Path="src/aspnetcore/Handler.AspNetCore.Generator.Test/Handler.AspNetCore.Generator.Test.csproj" />
+    <Project Path="src/aspnetcore/Handler.AspNetCore.Generator/Handler.AspNetCore.Generator.csproj" />
+    <Project Path="src/aspnetcore/Handler.AspNetCore/Handler.AspNetCore.csproj" />
+  </Folder>
+  <Folder Name="/console/">
+    <Project Path="src/console/Handler.Console/Handler.Console.csproj" />
+  </Folder>
+  <Folder Name="/core/">
+    <Project Path="src/core/Handler.Core/Handler.Core.csproj" />
+    <Project Path="src/core/Handler.Core.Test/Handler.Core.Test.csproj" />
+    <Project Path="src/core/Handler.FailureCode/Handler.FailureCode.csproj" />
+  </Folder>
+  <Folder Name="/union/">
+    <Project Path="src/union/Handler.Union/Handler.Union.csproj" />
+  </Folder>
+</Solution>

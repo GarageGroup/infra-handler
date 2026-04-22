@@ -15,96 +15,27 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9.0.x'
-
-     # Add NuGet Sources
+        dotnet-version: 10.0.x
 
     - name: Create Local NuGet Directory
       run: mkdir ~/nuget
 
-    - name: Add Local Nuget Source
-      run: dotnet nuget add source ~/nuget
+    - name: Restore Infra.Handler
+      run: dotnet restore
 
-    - name: Add GarageGroup NuGet Source
-      run: >
-        dotnet nuget add source ${{ vars.GG_NUGET_SOURCE_URL }}
-        -n garage
-        -u ${{ secrets.GG_NUGET_SOURCE_USER_NAME }}
-        -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
-        --store-password-in-clear-text
+    - name: Build Infra.Handler
+      run: dotnet build --no-restore -c Release
 
-    # Handler.FailureCode
+    - name: Test Infra.Handler
+      run: dotnet test --no-restore -c Release
 
-    - name: Restore Handler.FailureCode
-      run: dotnet restore ./src/*/Handler.FailureCode.csproj
-
-    - name: Build Handler.FailureCode
-      run: dotnet build ./src/*/Handler.FailureCode.csproj --no-restore  -c Release
-
-    - name: Pack Handler.FailureCode
-      run: dotnet pack ./src/*/Handler.FailureCode.csproj --no-restore -o ~/nuget  -c Release
-
-    # Handler.Core
-
-    - name: Restore Handler.Core
-      run: dotnet restore ./src/*/Handler.Core.csproj
-
-    - name: Build Handler.Core
-      run: dotnet build ./src/*/Handler.Core.csproj --no-restore  -c Release
-
-    - name: Pack Handler.Core
-      run: dotnet pack ./src/*/Handler.Core.csproj --no-restore -o ~/nuget  -c Release
-
-    # Handler.Union
-
-    - name: Restore Handler.Union
-      run: dotnet restore ./src/*/Handler.Union.csproj
-
-    - name: Build Handler.Union
-      run: dotnet build ./src/*/Handler.Union.csproj --no-restore  -c Release
-
-    - name: Pack Handler.Union
-      run: dotnet pack ./src/*/Handler.Union.csproj --no-restore -o ~/nuget  -c Release
-
-    # Handler.Console
-
-    - name: Restore Handler.Console
-      run: dotnet restore ./src/*/Handler.Console.csproj
-
-    - name: Build Handler.Console
-      run: dotnet build ./src/*/Handler.Console.csproj --no-restore  -c Release
-
-    - name: Pack Handler.Console
-      run: dotnet pack ./src/*/Handler.Console.csproj --no-restore -o ~/nuget  -c Release
-
-    # Handler.AspNetCore.Generator
-
-    - name: Restore Handler.AspNetCore.Generator
-      run: dotnet restore ./src/*/Handler.AspNetCore.Generator.csproj
-
-    - name: Build Handler.AspNetCore.Generator
-      run: dotnet build ./src/*/Handler.AspNetCore.Generator.csproj --no-restore  -c Release
-
-    - name: Pack Handler.AspNetCore.Generator
-      run: dotnet pack ./src/*/Handler.AspNetCore.Generator.csproj --no-restore -o ~/nuget  -c Release
-
-    # Handler.AspNetCore
-
-    - name: Restore Handler.AspNetCore
-      run: dotnet restore ./src/*/Handler.AspNetCore.csproj
-
-    - name: Build Handler.AspNetCore
-      run: dotnet build ./src/*/Handler.AspNetCore.csproj --no-restore  -c Release
-
-    - name: Pack Handler.AspNetCore
-      run: dotnet pack ./src/*/Handler.AspNetCore.csproj --no-restore -o ~/nuget  -c Release
-
-    # Push
+    - name: Pack Infra.Handler
+      run: dotnet pack --no-build -o ~/nuget -c Release
 
     - name: Push Packages
       if: ${{ github.ref == 'refs/heads/main' }}
       run: >
-        dotnet nuget push "../../../nuget/*.nupkg"
-        -s ${{ vars.GG_NUGET_SOURCE_URL }}
-        -k ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }}
+        dotnet nuget push ~/nuget/*.nupkg
+        -s https://api.nuget.org/v3/index.json
+        -k ${{ secrets.NUGET_SECRET }}
         --skip-duplicate
