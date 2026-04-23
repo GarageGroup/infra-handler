@@ -9,7 +9,7 @@
     <NoWarn>$(NoWarn);IDE0130;CA1859;CA1873</NoWarn>
     <RootNamespace>GarageGroup.Infra</RootNamespace>
     <AssemblyName>GarageGroup.Infra.Handler.Console</AssemblyName>
-    <Version>0.14.0</Version>
+    <Version>0.14.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GarageGroup.Infra.Azure.TokenCredential" Version="0.4.0" />
+    <PackageReference Include="GarageGroup.Infra.Azure.TokenCredential" Version="0.4.1" />
     <PackageReference Include="GarageGroup.Infra.Http.SocketsHandlerProvider" Version="3.2.1" />
   </ItemGroup>
 
